@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.meta",
+				"*.doc"
+			],
+			"follow_symlinks": "true",
+			"path": "."
+		}
+	],
+	"solution_file": "./JPS-Unity.sln"
+}
