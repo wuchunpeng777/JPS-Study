@@ -5,19 +5,19 @@ using System.Collections;
 [ExecuteInEditMode]
 public class TextSortingFix : MonoBehaviour
 {
-	public string sortingLayerName = "Default";
-	public int sortingOrder = 0;
+    public string sortingLayerName = "Default";
+    public int sortingOrder = 0;
 
-	// Use this for initialization
-	void Start () 
-	{
-		GetComponent<Renderer>().sortingLayerName = this.sortingLayerName;
-		GetComponent<Renderer>().sortingOrder     = this.sortingOrder;
-	}
+    // Use this for initialization
+    void Start()
+    {
+        GetComponent<Renderer>().sortingLayerName = this.sortingLayerName;
+        GetComponent<Renderer>().sortingOrder = this.sortingOrder;
+    }
 
-	void Update()
-	{
-		GetComponent<Renderer>().sortingLayerName = this.sortingLayerName;
-		GetComponent<Renderer>().sortingOrder     = this.sortingOrder;
-	}
+    void Update()
+    {
+        GetComponent<Renderer>().sortingLayerName = this.sortingLayerName;
+        GetComponent<Renderer>().sortingOrder = this.sortingOrder;
+    }
 }

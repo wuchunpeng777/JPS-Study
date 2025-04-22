@@ -2,68 +2,68 @@
 using System.Collections.Generic;
 
 // This Compoent will Take in a path argument and then draw the path, on the screen
-public class PathLineRenderer : MonoBehaviour 
+public class PathLineRenderer : MonoBehaviour
 {
-#region Serialize Fields
+    #region Serialize Fields
 
-	[SerializeField] private GameObject _pathLinePrefab;
+    [SerializeField] private GameObject _pathLinePrefab;
 
-	// Grid view so I can pull block size and buffer size and I know where to place my lines
-	public GridView _gridView;
+    // Grid view so I can pull block size and buffer size and I know where to place my lines
+    public GridView _gridView;
 
-#endregion
+    #endregion
 
-#region Private Fields
+    #region Private Fields
 
-	private GameObject[] _lines = new GameObject[0];
+    private GameObject[] _lines = new GameObject[0];
 
-#endregion
+    #endregion
 
 // ( I should probably throw these in an interface )
-#region public Methods
 
-	// Set the points and turn on the path
-	public void drawPath( List<Point> directed_path )
-	{
-		Debug.Assert( _gridView != null, "Grid View is NULL");
+    #region public Methods
 
-		disablePath();
+    // Set the points and turn on the path
+    public void drawPath(List<Point> directed_path)
+    {
+        Debug.Assert(_gridView != null, "Grid View is NULL");
 
-		// Allocate Child Array Size
-		_lines = new GameObject[ directed_path.Count - 1 ];
-		Point[] directed_path_as_arr = directed_path.ToArray();
+        disablePath();
 
-		for ( int i = 1 ; i < directed_path_as_arr.Length ; ++i )
-		{
-			Point start_point = directed_path_as_arr[ i - 1 ], 
-			      end_point   = directed_path_as_arr[ i ];
+        // Allocate Child Array Size
+        _lines = new GameObject[directed_path.Count - 1];
+        Point[] directed_path_as_arr = directed_path.ToArray();
 
-			// Calculate WorldSpace position based off what Grid View Says
-			Vector3 start_world_pos = _gridView.getNodePosAsWorldPos( start_point ),
-			        end_world_pos   = _gridView.getNodePosAsWorldPos( end_point );
+        for (int i = 1; i < directed_path_as_arr.Length; ++i)
+        {
+            Point start_point = directed_path_as_arr[i - 1],
+                end_point = directed_path_as_arr[i];
 
-			// Allocate a new Path Line
-			GameObject line_path_obj = Instantiate( _pathLinePrefab );
-			line_path_obj.GetComponent<Transform>().parent = this.GetComponent<Transform>();    // I'm your Da'Da now
+            // Calculate WorldSpace position based off what Grid View Says
+            Vector3 start_world_pos = _gridView.getNodePosAsWorldPos(start_point),
+                end_world_pos = _gridView.getNodePosAsWorldPos(end_point);
 
-			// Get Line Info
-			var pathSegment = line_path_obj.GetComponent<PathSegmentRenderer>();
-			pathSegment.DrawSegment( start_world_pos, end_world_pos );
+            // Allocate a new Path Line
+            GameObject line_path_obj = Instantiate(_pathLinePrefab);
+            line_path_obj.GetComponent<Transform>().parent = this.GetComponent<Transform>(); // I'm your Da'Da now
 
-			_lines[ i - 1 ] = line_path_obj;    // Grab a ref to this new object
-		}
-	}
+            // Get Line Info
+            var pathSegment = line_path_obj.GetComponent<PathSegmentRenderer>();
+            pathSegment.DrawSegment(start_world_pos, end_world_pos);
 
-	// Just turn off the view
-	public void disablePath()
-	{
-		// Kill all my children
-		foreach ( GameObject child in _lines )
-		{
-			DestroyImmediate( child );
-		}
-	}
+            _lines[i - 1] = line_path_obj; // Grab a ref to this new object
+        }
+    }
 
-#endregion
+    // Just turn off the view
+    public void disablePath()
+    {
+        // Kill all my children
+        foreach (GameObject child in _lines)
+        {
+            DestroyImmediate(child);
+        }
+    }
 
+    #endregion
 }
