@@ -342,7 +342,7 @@ public class Grid
         int new_row = row + change_row;
         int new_column = column + change_column;
 
-        // Check bounds
+        //在地图范围内
         if (isInBounds(new_row, new_column))
         {
             return new_column + (new_row * rowSize);
@@ -351,7 +351,7 @@ public class Grid
         return -1; // Out of bounds is -1
     }
 
-    //构建跳转点
+    //构建基础跳转点
     public void buildPrimaryJumpPoints()
     {
         // foreach obstacle
@@ -378,7 +378,7 @@ public class Grid
 
                     if (!node.isObstacle)
                     {
-                        // If nodes to the south and west are empty, then this node will be a jump point for those directions
+                        //下和左都不是障碍物
                         if (isEmpty(getIndexOfNodeTowardsDirection(north_east_index, eDirections.SOUTH)) &&
                             isEmpty(getIndexOfNodeTowardsDirection(north_east_index, eDirections.WEST)))
                         {
@@ -452,6 +452,7 @@ public class Grid
         }
     }
 
+    //计算四方向的和跳点之间的距离
     public void buildStraightJumpPoints()
     {
         // Calcin' Jump Distance, left and right

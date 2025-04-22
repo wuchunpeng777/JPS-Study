@@ -1610,7 +1610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11496778, guid: bdae4992f567bcf46a50f4df3afebff9, type: 3}
       propertyPath: rowSize
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11496778, guid: bdae4992f567bcf46a50f4df3afebff9, type: 3}
       propertyPath: numBlocks
